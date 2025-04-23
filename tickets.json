@@ -1,0 +1,35 @@
+[ {
+  "id" : 1,
+  "name" : "3",
+  "coordinates" : {
+    "x" : 5.0,
+    "y" : 6.0
+  },
+  "creationDate" : [ 2025, 4, 12, 10, 6, 55, 21555900 ],
+  "price" : 86,
+  "refundable" : false,
+  "type" : "VIP",
+  "venue" : {
+    "id" : 2,
+    "name" : "gh",
+    "capacity" : 5,
+    "type" : "BAR"
+  }
+}, {
+  "id" : 2,
+  "name" : "g",
+  "coordinates" : {
+    "x" : 5.0,
+    "y" : 6.0
+  },
+  "creationDate" : [ 2025, 4, 12, 11, 1, 11, 661034200 ],
+  "price" : 45432,
+  "refundable" : false,
+  "type" : "VIP",
+  "venue" : {
+    "id" : 3,
+    "name" : "h",
+    "capacity" : 7,
+    "type" : "BAR"
+  }
+} ]
