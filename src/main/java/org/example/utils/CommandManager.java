@@ -34,13 +34,4 @@ public class CommandManager {
     public void stopExecution() {
         this.isRunning = false;
     }
-
-    /**
-     * Проверяет, должно ли продолжаться выполнение команд.
-     *
-     * @return true если выполнение должно продолжаться, false в противном случае
-     */
-    public boolean isRunning() {
-        return this.isRunning;
-    }
 }
