@@ -2,11 +2,16 @@ package org.example;
 
 import org.example.commands.*;
 import org.example.utils.*;
-// TODO unkown command
-// TODO add floatparse возращает java error
-// TODO sort молчит
+
+
 public class Main {
     public static void main(String[] args) {
+        String filePath = System.getenv("lab5");
+        if (filePath == null || filePath.isEmpty()) {
+            System.err.println("укажите переменную окружения lab5");
+            System.exit(1);
+        }
+        
         CollectionManager collectionManager = CollectionManager.getInstance();
         CommandManager commandManager = new CommandManager();
         Console console = new Console(commandManager);
