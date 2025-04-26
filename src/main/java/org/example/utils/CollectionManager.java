@@ -3,53 +3,34 @@ package org.example.utils;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
-
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import lombok.Getter;
 import org.example.models.*;
 
 /**
- * Менеджер коллекции, реализующий паттерн Singleton.
+ * Менеджер коллекции.
  * Обеспечивает загрузку, хранение и управление коллекцией билетов.
  */
 public class CollectionManager {
-    private static CollectionManager instance;
-    private CollectionManager(){}
 
-    /**
-     * Возвращает экземпляр менеджера коллекции (реализация Singleton).
-     * При первом вызове инициализирует коллекцию из файла.
-     *
-     * @return единственный экземпляр CollectionManager
-     * @throws IllegalStateException если не удалось загрузить коллекцию
-     */
-    public static CollectionManager getInstance() {
-        if (instance == null){
-            try {
-                instance = new CollectionManager();
-                String filePath = System.getenv("lab5");
-                if (filePath == null || filePath.isEmpty()) {
-                    System.err.println("укажите переменную окружения lab5");
-                    System.exit(1);
-                }
-                instance.filePath = filePath;
-                instance.lastInitTime = LocalDateTime.now();
-                instance.collection = (Vector<Ticket>) DumpManager.loadTicket(filePath);
-                long maxid = 0;
-                for (Ticket t : instance.collection){
-                    if (t.getId() > maxid) {maxid = t.getId();}
-                }
-                IdGenerator.setIdInitial(maxid);
-
-            } catch (UnrecognizedPropertyException e) {
-                System.err.println("Дурачёк, в твоём файле написано что-то невалидное");
-                System.exit(1);
-            } catch (IOException e) {
-                System.err.println("Анлак");
-                System.exit(1);
+    public CollectionManager(String filePath) {
+        try {
+            this.filePath = filePath;
+            this.lastInitTime = LocalDateTime.now();
+            this.collection = (Vector<Ticket>) DumpManager.loadTicket(filePath);
+            long maxid = 0;
+            for (Ticket t : this.collection){
+                if (t.getId() > maxid) {maxid = t.getId();}
             }
+            IdGenerator.setIdInitial(maxid);
+
+        } catch (UnrecognizedPropertyException e) {
+            System.err.println("Дурачёк, в твоём файле написано что-то невалидное");
+            System.exit(1);
+        } catch (IOException e) {
+            System.err.println("Анлак");
+            System.exit(1);
         }
-        return instance;
     }
 
     private String filePath;
